@@ -1,23 +1,27 @@
-import logo from './logo.svg';
 import './App.css';
+import Results from './Results';
+import { useEffect, useState } from 'react';
+
 
 function App() {
+
+  const [nasaPhotos, setNasaPhotos] = useState([]);
+
+  useEffect(() => {
+    const apiKey = 'x09Mwv7oSt8NV1wBZNGHN1C03a0YX1SRRSVDUYcz';
+    fetch(`https://api.nasa.gov/planetary/apod?api_key=${apiKey}`)
+    .then(res => res.json())
+    .then(data => {
+      setNasaPhotos(data);
+    })
+  },[])
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <header>Rover</header>
+      <Results
+      nasaPhotos = {nasaPhotos} 
+      />
     </div>
   );
 }
