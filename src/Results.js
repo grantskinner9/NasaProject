@@ -1,10 +1,18 @@
 const Results = ({nasaPhotos}) => {
-  console.log(nasaPhotos);
   return(
     <ul>
-      <h2>{nasaPhotos.title}</h2>
-      <img src={nasaPhotos.url} alt={nasaPhotos.title} />
-      <p>{nasaPhotos.explanation}</p>
+      {
+        nasaPhotos.map(results => {
+          return(
+            <li key={results.date}>
+              <img src={results.url} alt={results.title} />
+              <h2>{results.title}</h2>
+              <p>{results.date}</p>
+              <p>{results.explanation}</p>
+            </li>
+          )
+        })
+      }
     </ul>
   )
 }
