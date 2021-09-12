@@ -1,0 +1,16 @@
+.imageResults {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  .imageGrid {
+    width: calc(100% / 3);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    img {
+      object-fit: cover;
+      height: 400px;
+      width: 400px;
+    }
+  }
+}
