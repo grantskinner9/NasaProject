@@ -1,12 +1,13 @@
 import './styles/App.css';
 import Results from './Results';
 import { useEffect, useState } from 'react';
-
+import firebase from './firebase';
 
 function App() {
 
   const [nasaPhotos, setNasaPhotos] = useState([]);
   const [showLoader, setShowLoader] = useState(true);
+  const [photosInDB, setPhotosInDB] = useState([]);
 
   useEffect(() => {
     // Grab todays date
@@ -33,6 +34,22 @@ function App() {
     })
   },[])
 
+  useEffect(() => {
+    const dbRef = firebase.database().ref();
+    dbRef.on('value', (response) => {
+      const myData = response.val();
+      const arrData = [];
+
+      for(let key in myData) {
+        const photoObj = {
+          photo: myData[key]
+        }
+        arrData.push(photoObj)
+      }
+      setPhotosInDB(arrData)
+    })
+  }, [])
+
   return (
     <div className="App">
       <header>
@@ -44,6 +61,7 @@ function App() {
           <div className="lds-ring"><div></div><div></div><div></div><div></div></div> :
           <Results
           nasaPhotos = {nasaPhotos} 
+          photosInDB = {photosInDB}
           />
         }
       </main>
