@@ -24,15 +24,16 @@ const Results = ({nasaPhotos, photosInDB}) => {
     <ul className="imageResults">
       {
         nasaPhotos.map(results => {
+          console.info(results)
           return(
             <li key={results.date} className="imageGrid">
               <img src={results.url} alt={results.title} />
               <div className="seeMore">
                 <p>See More</p>
                 {
-                  photosInDB.map(photo => {
-                    console.info(photo)
-                  })
+                  results.liked ?
+                  <FontAwesomeIcon icon={faHeartSolid} onClick={() => heartPhoto(results.title, results.date)}/> :
+                  <FontAwesomeIcon icon={faHeartRegular} />
                 }
               </div>
             </li>

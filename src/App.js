@@ -9,6 +9,23 @@ function App() {
   const [showLoader, setShowLoader] = useState(true);
   const [photosInDB, setPhotosInDB] = useState([]);
 
+
+  // useEffect(() => {
+  //   const dbRef = firebase.database().ref();
+  //   dbRef.on('value', (response) => {
+  //     const myData = response.val();
+  //     const arrData = [];
+
+  //     for(let key in myData) {
+  //       const photoObj = {
+  //         photo: myData[key]
+  //       }
+  //       arrData.push(photoObj)
+  //     }
+  //     setPhotosInDB(arrData)
+  //   })
+  // }, [])
+
   useEffect(() => {
     // Grab todays date
     const endDate = new Date().toISOString().split('T')[0];
@@ -27,28 +44,31 @@ function App() {
       data.reverse();
       // Filter results to only include images
       const filteredResults = data.filter(result => result.media_type === "image")
-      // push data into state
-      setNasaPhotos(filteredResults);
-      // Turn animated loader off
-      setShowLoader(false);
+      const dbRef = firebase.database().ref();
+      dbRef.on('value', (response) => {
+        const myData = response.val();
+        const arrData = [];
+
+        for(let key in myData) {
+          const photoObj = {
+            photo: myData[key]
+          }
+          arrData.push(photoObj)
+        }
+        for (let i = 0; i < filteredResults.length; i++) {
+          for (let j = 0; j < arrData.length; j++) {
+            if(filteredResults[i].date === arrData[j].photo.date) {
+              filteredResults[i].liked = true
+            }
+          }
+        }
+        // push data into state
+        setNasaPhotos(filteredResults);
+        // Turn animated loader off
+        setShowLoader(false);
+      })
     })
   },[])
-
-  useEffect(() => {
-    const dbRef = firebase.database().ref();
-    dbRef.on('value', (response) => {
-      const myData = response.val();
-      const arrData = [];
-
-      for(let key in myData) {
-        const photoObj = {
-          photo: myData[key]
-        }
-        arrData.push(photoObj)
-      }
-      setPhotosInDB(arrData)
-    })
-  }, [])
 
   return (
     <div className="App">
