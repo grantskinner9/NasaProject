@@ -5,26 +5,13 @@ import { useState } from "react";
 import firebase from "./firebase"
 
 
-const Results = ({nasaPhotos, photosInDB}) => {
+const Results = ({nasaPhotos, handleClick}) => {
 
-  const [ likePhoto, setLikePhoto ] = useState([]);
-  
-  const heartPhoto = (title, date) => {
-    const photosObject = {
-      title: title,
-      date: date,
-      liked: true
-    }
-    const dbRef = firebase.database().ref();
-    dbRef.push(photosObject);
-  }
-  
 
   return(
     <ul className="imageResults">
       {
         nasaPhotos.map(results => {
-          console.info(results)
           return(
             <li key={results.date} className="imageGrid">
               <img src={results.url} alt={results.title} />
@@ -32,8 +19,8 @@ const Results = ({nasaPhotos, photosInDB}) => {
                 <p>See More</p>
                 {
                   results.liked ?
-                  <FontAwesomeIcon icon={faHeartSolid} onClick={() => heartPhoto(results.title, results.date)}/> :
-                  <FontAwesomeIcon icon={faHeartRegular} />
+                  <FontAwesomeIcon icon={faHeartSolid} onClick={() => handleClick(results)}/> :
+                  <FontAwesomeIcon icon={faHeartRegular} onClick={() => handleClick(results)}/>
                 }
               </div>
             </li>

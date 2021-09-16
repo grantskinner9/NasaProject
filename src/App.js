@@ -9,23 +9,6 @@ function App() {
   const [showLoader, setShowLoader] = useState(true);
   const [photosInDB, setPhotosInDB] = useState([]);
 
-
-  // useEffect(() => {
-  //   const dbRef = firebase.database().ref();
-  //   dbRef.on('value', (response) => {
-  //     const myData = response.val();
-  //     const arrData = [];
-
-  //     for(let key in myData) {
-  //       const photoObj = {
-  //         photo: myData[key]
-  //       }
-  //       arrData.push(photoObj)
-  //     }
-  //     setPhotosInDB(arrData)
-  //   })
-  // }, [])
-
   useEffect(() => {
     // Grab todays date
     const endDate = new Date().toISOString().split('T')[0];
@@ -51,6 +34,7 @@ function App() {
 
         for(let key in myData) {
           const photoObj = {
+            key: key,
             photo: myData[key]
           }
           arrData.push(photoObj)
@@ -58,10 +42,11 @@ function App() {
         for (let i = 0; i < filteredResults.length; i++) {
           for (let j = 0; j < arrData.length; j++) {
             if(filteredResults[i].date === arrData[j].photo.date) {
-              filteredResults[i].liked = true
+              filteredResults[i].liked = true;
             }
           }
         }
+        setPhotosInDB(arrData)
         // push data into state
         setNasaPhotos(filteredResults);
         // Turn animated loader off
@@ -69,6 +54,34 @@ function App() {
       })
     })
   },[])
+
+  const handleClick = (result) => {
+    if (!result.liked) {
+      const displayedPhotos = [...nasaPhotos];
+      displayedPhotos.forEach(photo => {
+        if(result.date === photo.date) {
+          photo.liked = true;
+        }
+      })
+      const likedObj = {
+        date: result.date,
+        liked: true,
+        title: result.title
+      }
+      const dbRef = firebase.database().ref();
+      dbRef.push(likedObj);
+      setNasaPhotos(displayedPhotos)
+
+    } else {
+      const displayedPhotos = [...nasaPhotos];
+      displayedPhotos.forEach(photo => {
+        if(result.date === photo.date) {
+          photo.liked = false;
+        }
+      })
+
+    }
+  }
 
   return (
     <div className="App">
@@ -82,6 +95,7 @@ function App() {
           <Results
           nasaPhotos = {nasaPhotos} 
           photosInDB = {photosInDB}
+          handleClick = {handleClick}
           />
         }
       </main>
