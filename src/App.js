@@ -43,6 +43,7 @@ function App() {
           for (let j = 0; j < arrData.length; j++) {
             if(filteredResults[i].date === arrData[j].photo.date) {
               filteredResults[i].liked = true;
+              filteredResults[i].key = arrData[j].key
             }
           }
         }
@@ -74,12 +75,15 @@ function App() {
 
     } else {
       const displayedPhotos = [...nasaPhotos];
+      let key;
       displayedPhotos.forEach(photo => {
         if(result.date === photo.date) {
           photo.liked = false;
+          key = photo.key
         }
       })
-
+      const dbRef = firebase.database().ref();
+      dbRef.child(key).remove();
     }
   }
 
