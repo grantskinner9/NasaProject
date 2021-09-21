@@ -475,7 +475,7 @@ footer p {
 }
 @media (max-width: 450px) {
   .imageResults .imageGrid img {
-    height: 300px;
-    width: 300px;
+    height: 450px;
+    width: 450px;
   }
 }/*# sourceMappingURL=App.css.map */
