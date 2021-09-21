@@ -461,7 +461,9 @@ footer p {
   }
   .modal .textContainer {
     width: 100%;
-    padding: 20px;
+  }
+  .modal .description {
+    padding-top: 20px;
   }
 }
 @media (max-width: 800px) {
