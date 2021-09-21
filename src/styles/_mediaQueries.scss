@@ -9,12 +9,11 @@
     align-items: center;
     .imageContainer {
       width: 100%;
-      height: 70%;
       display: flex;
       justify-content: center;
       background-color: black;
       img {
-        width: 70%;
+        width: 100%;
       }
     }
     .textContainer {
