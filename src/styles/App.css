@@ -319,16 +319,19 @@ h1 {
 .modalContainer {
   display: flex;
   justify-content: center;
-  align-self: center;
+  align-items: center;
   position: fixed;
-  top: 5%;
+  top: 0;
+  height: 100vh;
 }
 
 .modal {
+  height: auto;
   width: 80%;
   display: flex;
   justify-content: space-between;
   background-color: white;
+  border: 1px black solid;
 }
 .modal .imageContainer {
   width: 650px;
@@ -349,10 +352,33 @@ h1 {
   justify-content: center;
   align-items: center;
   padding: 40px;
+  position: relative;
+}
+.modal .textContainer .close {
+  position: absolute;
+  top: 5%;
+  right: 5%;
+  font-size: 2rem;
+  cursor: pointer;
+}
+.modal .textContainer .close:hover, .modal .textContainer .close:focus {
+  color: #245e81;
+}
+.modal .textContainer .heart {
+  font-size: 1.5rem;
+  margin-top: 20px;
+  cursor: pointer;
+}
+.modal .textContainer .heart:hover, .modal .textContainer .heart:focus {
+  color: #ff0044;
 }
 .modal .description {
   padding-top: 50px;
   font-size: 0.8rem;
+}
+
+.liked {
+  color: #ff0044;
 }
 
 .imageResults {
@@ -369,7 +395,6 @@ h1 {
      object-fit: cover;
   height: 400px;
   width: 400px;
-  cursor: pointer;
 }
 .imageResults .imageGrid .seeMore {
   position: absolute;
@@ -377,20 +402,78 @@ h1 {
   width: 100%;
   top: 0;
   opacity: 0;
-  text-align: center;
-  padding-top: 40%;
   font-size: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 .imageResults .imageGrid .seeMore:hover, .imageResults .imageGrid .seeMore:focus {
-  opacity: 0.8;
+  opacity: 0.9;
   color: white;
   background-color: black;
+}
+.imageResults .imageGrid .seeText {
+  padding-bottom: 30px;
   cursor: pointer;
 }
+.imageResults .imageGrid .seeText:hover, .imageResults .imageGrid .seeText:focus {
+  color: #efc050;
+}
 
+.resultsHeart {
+  cursor: pointer;
+}
+.resultsHeart:hover, .resultsHeart:focus {
+  color: #ff0044;
+}
+
+footer {
+  margin-top: 50px;
+}
 footer p {
   text-align: center;
   padding: 15px 0;
   background-color: #232227;
   color: #f8f8f6;
+}
+
+@media (max-width: 1200px) {
+  .modalContainer {
+    width: 100vw;
+    overflow: scroll;
+  }
+
+  .modal {
+    flex-direction: column;
+    width: 600px;
+    align-items: center;
+  }
+  .modal .imageContainer {
+    width: 100%;
+    height: 70%;
+    display: flex;
+    justify-content: center;
+    background-color: black;
+  }
+  .modal .imageContainer img {
+    width: 70%;
+  }
+  .modal .textContainer {
+    width: 100%;
+    padding: 20px;
+  }
+}
+@media (max-width: 800px) {
+  .modal {
+    width: 100%;
+    height: 100vh;
+    overflow: scroll;
+  }
+}
+@media (max-width: 450px) {
+  .imageResults .imageGrid img {
+    height: 300px;
+    width: 300px;
+  }
 }/*# sourceMappingURL=App.css.map */

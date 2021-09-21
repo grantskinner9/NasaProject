@@ -12,14 +12,14 @@ const Modal = ({modalInfo, handleClick, closeModal}) => {
           <img src={modalInfo.url} alt={modalInfo.title} />
         </div>
         <div className="textContainer">
-          <FontAwesomeIcon icon={faTimes} onClick={closeModal}/>
+          <FontAwesomeIcon className="close" icon={faTimes} onClick={closeModal}/>
           <h2>{modalInfo.title}</h2>
           <p>{modalInfo.date}</p>
           <p className="description">{modalInfo.explanation}</p>
           {
             modalInfo.liked ?
-            <FontAwesomeIcon icon={faHeartSolid} onClick={() => handleClick(modalInfo)}/> :
-            <FontAwesomeIcon icon={faHeartRegular} onClick={() => handleClick(modalInfo)}/>
+            <FontAwesomeIcon className="heart liked" icon={faHeartSolid} onClick={() => handleClick(modalInfo)}/> :
+            <FontAwesomeIcon className="heart" icon={faHeartRegular} onClick={() => handleClick(modalInfo)}/>
           }
         </div>
       </div>

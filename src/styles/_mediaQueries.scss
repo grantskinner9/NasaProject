@@ -1,0 +1,40 @@
+@media (max-width: 1200px) {
+  .modalContainer {
+    width: 100vw;
+    overflow: scroll;
+  }
+  .modal {
+    flex-direction: column;
+    width: 600px;
+    align-items: center;
+    .imageContainer {
+      width: 100%;
+      height: 70%;
+      display: flex;
+      justify-content: center;
+      background-color: black;
+      img {
+        width: 70%;
+      }
+    }
+    .textContainer {
+      width: 100%;
+      padding: 20px;
+    }
+  }
+}
+
+@media (max-width: 800px) {
+  .modal {
+    width: 100%;
+    height: 100vh;
+    overflow: scroll;
+  }
+}
+
+@media (max-width: 450px) {
+  .imageResults .imageGrid img {
+    height: 300px;
+    width: 300px;
+  }
+}

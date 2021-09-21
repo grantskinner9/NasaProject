@@ -9,7 +9,6 @@
       object-fit: cover;
       height: 400px;
       width: 400px;
-      cursor: pointer;
     }
     .seeMore {
       position: absolute;
@@ -17,16 +16,33 @@
       width: 100%;
       top: 0;
       opacity: 0;
-      text-align: center;
-      padding-top: 40%;
       font-size: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
       &:hover,
       &:focus {
-        opacity: 0.8;
+        opacity: 0.9;
         color: white;
         background-color: black;
-        cursor: pointer;
       }
     }
+    .seeText {
+      padding-bottom: 30px;
+      cursor: pointer;
+      &:hover,
+      &:focus {
+        color: #efc050;
+      }
+    }
+  }
+}
+
+.resultsHeart {
+  cursor: pointer;
+  &:hover,
+  &:focus {
+    color: rgb(255, 0, 68);
   }
 }
