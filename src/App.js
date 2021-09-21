@@ -94,7 +94,6 @@ function App() {
       // New array with new "liked" property is pushed to state to trigger page render and display the newly "liked" photo
       setNasaPhotos(displayedPhotos);
     } else {
-      console.info(result)
       // runs if clicked result DOES have a "liked" property on it.
       // Make a copy of nasaPhotos state array.
       const displayedPhotos = [...nasaPhotos];

@@ -2,12 +2,28 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart as faHeartRegular } from "@fortawesome/free-regular-svg-icons";
 import { faHeart as faHeartSolid } from "@fortawesome/free-solid-svg-icons";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
+import { useEffect, useRef } from "react";
 
 const Modal = ({modalInfo, handleClick, closeModal}) => {
 
+  let containerRef = useRef();
+
+  // Effect handles click outside of modal to close
+  useEffect(() => {
+    let handler = (e) => {
+      if(!containerRef.current.contains(e.target)) {
+        closeModal();
+      }
+    };
+    document.addEventListener("mousedown", handler)
+    return () => {
+      document.removeEventListener("mousedown", handler);
+    }
+  })
+
   return(
     <div className="modalContainer">
-      <div className="modal">
+      <div ref={containerRef} className="modal">
         <div className="imageContainer">
           <img src={modalInfo.url} alt={modalInfo.title} />
         </div>
